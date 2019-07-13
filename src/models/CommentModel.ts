@@ -1,43 +1,29 @@
 import * as Sequelize from 'sequelize'
-import { User } from './UserModel'
-import { Post } from './PostModel'
+import User from './UserModel'
+export default class Comment extends Sequelize.Model {
+    static init(sequelize) {
+        return super.init({
+          title: {
+            type: Sequelize.STRING,
+            allowNull: false,
+          },
+          body: {
+            type: Sequelize.TEXT,
+            allowNull: false,
+          },
+          author: {
+              type: Sequelize.INTEGER,
+          }
+        }, { sequelize })
+    };
 
-export class Comment extends Sequelize.Model {
-    id?: number
-    comment: string
-    post: number
-    user: number
-    createdAt?: string
-    updatedAt?: string
+    static associate(models) {
+        this.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false,
+                field: 'author',
+                name: 'author'
+            }
+        });
+    }
 }
-
-Comment.init({
-    id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true 
-    },
-    comment: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }
-}, {
-    tableName: 'Comments',
-    sequelize: new Sequelize.Sequelize('mysql://root:JLambert1997@localhost:3306/wampmysqld64')
-})
-
-Comment.belongsTo(User, {
-    foreignKey: {
-        allowNull: false,
-        field: 'user',
-        name: 'user'
-    }
-})
-Comment.belongsTo(Post, {
-    foreignKey: {
-        allowNull: false,
-        field: 'post',
-        name: 'post'
-    }
-})
