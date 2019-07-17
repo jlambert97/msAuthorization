@@ -33,7 +33,8 @@ export default class User extends Sequelize.Model {
                     const salt = bcrypt.genSaltSync();
                     user.password = bcrypt.hashSync(user.password, salt)
                 }
-            } 
+            },
+            tableName: 'TB.User' 
         } 
     )}
 }

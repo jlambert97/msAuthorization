@@ -1,6 +1,7 @@
 import * as Sequelize from 'sequelize';
-import CommentModel from '../models/CommentModel'
+import ApplicationModel from '../models/ApplicationModel'
 import UserModel from '../models/UserModel'
+import UserApplicationModel from '../models/UserApplication';
 
 // const developmentDb = new Sequelize.Sequelize('db', 'root', 'JLambert1997', {
 //     dialect: "mysql",
@@ -10,13 +11,10 @@ import UserModel from '../models/UserModel'
 const developmentDb = new Sequelize.Sequelize('mysql://root:JLambert1997@localhost:3306/db');
 
 const models = {
-    Comment: CommentModel.init(developmentDb),
-    User: UserModel.init(developmentDb)
+    Application: ApplicationModel.init(developmentDb),
+    User: UserModel.init(developmentDb),
+    UserApplication: UserApplicationModel.init(developmentDb)
   };
-
-Object.values(models)
-    .filter(model => typeof model.associate === "function")
-    .forEach(model => model.associate(models));
 
 const database = {
     ...models,
