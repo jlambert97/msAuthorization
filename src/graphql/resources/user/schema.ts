@@ -10,6 +10,7 @@ const userTypes = `
     input UserCreate {
         name: String!
         email: String!
+        password: String!
     }
 
     input UserUpdatePassword {

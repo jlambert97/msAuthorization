@@ -38,3 +38,12 @@ export default class User extends Sequelize.Model {
         } 
     )}
 }
+
+
+export function findUsers() {
+    return User.findAll()
+}
+
+export function createNewUser(data) {
+    User.create(data);
+}
